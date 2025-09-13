@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nannu & Aryan — 6 Months Together</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <style>
+    body {margin:0; padding:0; background: radial-gradient(ellipse at bottom, #1b2735 5%, #090a0f 100%);
+      color:#fff; font-family:'Segoe UI',Arial,sans-serif; min-height:100vh; width:100vw; overflow-x:hidden;}
+    #stars, #stars2, #stars3 {position:fixed; top:0; left:0; width:100vw; height:100vh; pointer-events:none; z-index:0;}
+    .moon {position:absolute; top:4vw; left:74vw; width:90px; height:90px;
+      background:radial-gradient(circle at 40% 40%, #fff 70%, #feeea1 100%, #e3e0da 110%);
+      border-radius:50%; box-shadow:0 0 80px 60px #effffb77, 0 0 120px 80px #efeaee inset;
+      animation:moonFloat 4s infinite alternate cubic-bezier(.8,.1,.5,.9); z-index:2;}
+    @keyframes moonFloat {to{transform:translateY(-15px) scale(1.04);}}
+    .card {margin:6vw auto 4vw auto; position:relative; z-index:6; background:rgba(255,255,255,0.14); border-radius:28px;
+      box-shadow:0 8px 40px #22243144, 0 0 10px #ffe3f577 inset; padding:28px 5vw 22px 5vw; min-width:290px; max-width:97vw;
+      text-align:center; animation:bouncePop 1.3s cubic-bezier(.52,1.8,.4,.7) 0.3s backwards; border:3px solid #ffe3f5;}
+    @keyframes bouncePop {0%{transform:scale(0.8) rotate(-3deg);} 25%{transform:scale(1.10) rotate(1deg);}
+      50%{transform:scale(0.98) rotate(-2deg);} 100%{transform:scale(1) rotate(0);}}
+    h1 {color:#ffe595; text-shadow:0 3px 18px #ac76d6, 0 8px 16px #757dc1;
+      font-size:2.1em; margin-bottom:0.3em; letter-spacing:.09em; font-weight:700;}
+    .hindi-words {font-size:1.18em; color:#ff87ba; line-height:1.6; margin-bottom:10px;}
+    .emotion-msg {font-size:1.03em; color:#e9c6fa; margin-top:1em; margin-bottom:1em;}
+    .sweet-words {margin-top:1.1em; color:#ffd1dc; font-size:1.07em; line-height:1.5;}
+    .footer {color:#b8f7ff; font-size:1.06em; margin-top:1em; letter-spacing:.06em;}
+    .like-btn {display:inline-block; margin:16px auto 8px auto; padding:13px 0; border:none; background:none; cursor:pointer;}
+    .like-heart {font-size:2.5em; color:#fa5ea3; transition:transform 0.2s cubic-bezier(.4,.9,.3,1.1);}
+    .like-heart.pop {transform:scale(1.29) rotate(-8deg);}
+    .like-count {font-size:1.1em; color:#fffacb; font-weight:600;}
+    .game-section {background:rgba(22,15,38,0.68); box-shadow:0 2px 24px #be99f479, 0 0 10px #ffe3f577 inset;
+      border-radius:19px; padding:22px 8px 21px 8px; margin:6vw auto 4vw auto; max-width:350px; text-align:center; position:relative; z-index:6;}
+    h2 {margin-top:0; font-size:1.08em; color:#fff7b6; letter-spacing:.04em; font-weight:bold;}
+    .score {font-size:1.16em; color:#fff7b6; margin:8px 0; font-weight:bold;}
+    .winner-trophy {font-size:1.4em; margin-left:4px; margin-right:4px;}
+    #hamster.pop {animation:hamster-bounce .44s cubic-bezier(.32,2.2,.46,.8);}
+    @keyframes hamster-bounce {0%{transform:scale(1);} 47%{transform:scale(1.4) rotate(-23deg);} 100%{transform:scale(1);}}
+    @media (max-width:490px) {.card,.game-section{margin:2vw; padding:11px 3vw 13px 3vw;}
+      .moon {left:73vw; width:38px; height:38px; top:2vw;} h1 {font-size:1.14em;} .hindi-words{font-size:1em;}
+      .emotion-msg, .sweet-words, .footer{font-size:0.98em;}}
+  </style>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+  <canvas id="stars2"></canvas>
+  <canvas id="stars3"></canvas>
+  <div class="moon"></div>
+  <div id="hearts"></div>
+  <div class="card" id="topCard">
+    <h1>Happy 6 Months, Nannu!</h1>
+    <button class="like-btn" id="likeBtn"><span class="like-heart" id="heartIcon">❤️</span></button>
+    <span class="like-count" id="likeCount">1</span>
+    <div class="hindi-words">
+      Nannu Pyaaru<br>
+      Shone Bachee<br>
+      My Moon, Mera Zuvv<br>
+      <span style="color:#ffd1dc;">Aap  meri duniya ho!</span>
+    </div>
+    <div class="emotion-msg">
+      Happy 6 months, Nannu.<br>
+      Thank You so much for everythig,<br>
+      apke bina sab suna suna hai.. Jaise Saya bhi saath chor jaye kabi kabi vaisa feel hota h.<br>
+      <span style="color:#fffcf6;">aap bohot pyaare ho bohot ache ho Nannu i miss you too much.</span>
+    </div>
+    <div class="sweet-words">
+      You’re the Positivity in me.<br>
+      My heart is yours forever.<br>
+      You are My Universe.<br>
+      Thank you for every Second , every day.<br>
+      You make my heart smile.<br>
+       mera dil meri rooh hai  apne chura liye but mujhe nhi chahiye wapas<br>
+      With you, every moment is a Blessing.<br>
+      Nannu,Aap Mera Sukkon ho.<br>
+    
+      My princess mera pyaaru thodi games khel lo 
+    </div>
+    <div class="footer">— Apka Starr </div>
+  </div>
+  <!-- Game 1: Catch the Hamster -->
+  <div class="game-section" id="hamsterGame">
+    <h2>Game 1: Catch the Hamster!</h2>
+    <button id="hamsterStartBtn" style="margin:7px 0 12px 0;border-radius:10px;background:#fff7b830;padding:8px 18px;border:1.4px solid #ffe3f5;color:#bc57c4;cursor:pointer;font-weight:bold;">Start Hard Mode</button>
+    <div id="hamster-area" style="position:relative;width:230px;height:170px;margin:0 auto;background:#29214a33;border-radius:16px;">
+      <!-- Hamster image (add hamster.png in folder) -->
+      <img id="hamster" src="hamster.png" alt="hamster missing" style="width:64px; position:absolute; top:55px; left:70px; transition:.12s; z-index:2; display:none;">
+      <!-- Cup image (add cup.png in folder) -->
+      <img id="cup" src="cup.png" alt="cup missing" style="width:54px; position:absolute; bottom:10px; left:95px; z-index:1;">
+      <span id="hamster-score" style="position:absolute;top:4px;left:10px;color:#ffe377;font-size:1.1em;font-weight:bold;">Caught: 0</span>
+    </div>
+    <div id="hamster-result" style="margin-top:10px;color:#e9f7fa;"></div>
+  </div>
+  <!-- Game 2: Healthy vs Noodles -->
+  <div class="game-section" id="foodGame">
+    <h2>Game 2: Healthy vs Noodles</h2>
+    <button id="foodResetBtn" style="margin:7px 0 12px 0;border-radius:10px;background:#fff7b830;padding:8px 18px;border:1.4px solid #ffe3f5;color:#bc57c4;cursor:pointer;font-weight:bold;">Rematch</button>
+    <div id="food-area" style="position:relative;width:265px;height:110px;margin:0 auto;background:#34295c31;border-radius:16px;">
+      <img id="boy" src="boy.png" alt="boy missing" style="position:absolute;width:50px;bottom:13px;left:13px;z-index:2;">
+      <span id="boy-emoji" style="position:absolute;bottom:75px;left:24px;font-size:1.3em;"></span>
+      <img id="girl" src="girl.png" alt="girl missing" style="position:absolute;width:49px;bottom:12px;right:13px;z-index:2;">
+      <span id="girl-emoji" style="position:absolute;bottom:75px;right:24px;font-size:1.3em;"></span>
+      <img id="broccoli" src="broccoli.png" alt="broccoli missing" style="position:absolute;width:30px;top:18px;left:65px;cursor:pointer;z-index:2;">
+      <img id="noodles" src="noodles.png" alt="noodles missing" style="position:absolute;width:38px;top:21px;right:80px;cursor:pointer;z-index:2;">
+      <span id="food-score" style="position:absolute;top:5px;left:108px;color:#ffe377;font-size:1.1em;font-weight:bold;">🥦0 | 0🍜</span>
+      <span id="food-banner" style="display:none;position:absolute;top:42px;left:0px;width:100%;font-size:1.24em;color:#fff;font-weight:bold;text-shadow:0 2px 6px #ea7aee;">Winner!</span>
+      <div id="confetti" style="display:none;position:absolute;inset:0;pointer-events:none;"></div>
+    </div>
+    <div class="score" id="food-result"></div>
+    <div style="font-size:0.97em;color:#ffdbe1;">Be the peacemaker—help them balance yummy food & health!</div>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded",function(){
+      // Starfield animation
+      function starsInit(canvasId, starCount, speed, size, opacity) {
+        const canvas = document.getElementById(canvasId),
+              ctx = canvas.getContext('2d');
+        let w = canvas.width = window.innerWidth, h = canvas.height = window.innerHeight, stars = [];
+        function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; genStars(); }
+        window.addEventListener('resize', resize);
+        function genStars() {stars=[]; for(let i=0;i<starCount;i++){stars.push({x:Math.random()*w,y:Math.random()*h,z:Math.random()*1+0.7});}}
+        genStars();
+        function drawStars() {
+          ctx.clearRect(0,0,w,h); ctx.globalAlpha = opacity;
+          for(let star of stars){
+            ctx.beginPath(); ctx.arc(star.x,star.y,size*star.z,0,2*Math.PI);
+            ctx.fillStyle = '#fff6fd'; ctx.shadowBlur = 11*star.z; ctx.shadowColor="#e3c8ff"; ctx.fill();
+            star.y += speed*star.z;
+            if(star.y>h){star.x=Math.random()*w;star.y=-size*2;star.z=Math.random()*1+0.7;}
+          }
+          requestAnimationFrame(drawStars);
+        }
+        drawStars();
+      }
+      starsInit('stars', 90, 0.18, 1.5, 0.7);
+      starsInit('stars2', 35, 0.13, 2.6, 0.5);
+      starsInit('stars3', 12, 0.09, 4.1, 0.3);
+
+      // Hearts
+      function spawnHearts() {
+        const emojiArr = ["💖","💘","💝","💞","💗","💓","💕"];
+        const heartsDiv = document.getElementById('hearts');
+        setInterval(()=>{
+          const heart = document.createElement('span');
+          heart.textContent = emojiArr[Math.floor(Math.random()*emojiArr.length)];
+          heart.className = 'heart';
+          heart.style.left = (10+Math.random()*80) + 'vw';
+          heart.style.top = '88vh';
+          heart.style.color = '#fff8ee';
+          heart.style.fontSize = (22+Math.random()*15)+"px";
+          heart.style.animationDuration = (6+Math.random()*3)+'s';
+          heartsDiv.appendChild(heart);
+          setTimeout(()=>heart.remove(), 7000);
+        }, 900);
+      }
+      spawnHearts();
+
+      // Like Button
+      let likeNum = 1;
+      const likeBtn = document.getElementById('likeBtn'),
+            likeCount = document.getElementById('likeCount'),
+            heartIcon = document.getElementById('heartIcon');
+      likeBtn.onclick = function () {
+        likeNum++;
+        likeCount.textContent = likeNum;
+        heartIcon.classList.add("pop");
+        setTimeout(()=>heartIcon.classList.remove("pop"),180);
+      };
+
+      // -------- HARDER HAMSTER GAME --------
+      // More jumps, time limit, escape if not clicked in time
+      let hamsterScore = 0, hamsterPlaying = false, hamsterClicks = 0;
+      const hamster = document.getElementById('hamster'),
+            hsArea = document.getElementById('hamster-area'),
+            hamsterScoreText = document.getElementById('hamster-score'),
+            hamsterResult = document.getElementById('hamster-result'),
+            hamsterStartBtn = document.getElementById('hamsterStartBtn');
+      let hamsterInterval, hamsterTimeout;
+
+      hamsterStartBtn.onclick = function() {
+        hamsterScore=0; hamsterClicks=0;
+        hamsterScoreText.textContent = "Caught: 0";
+        hamsterResult.textContent = "";
+        hamsterPlaying = true;
+        hamster.style.display = "";
+        moveHamster();
+        clearInterval(hamsterInterval);
+        clearTimeout(hamsterTimeout);
+        hamsterInterval = setInterval(moveHamster, 520); // Moves much faster
+        hamsterTimeout = setTimeout(hamsterEscape, 9000); // End after 9 seconds, escape
+      };
+      function moveHamster(){
+        if(!hamsterPlaying) return;
+        hamster.style.top = (15+Math.random()*80)+"px";
+        hamster.style.left = (10+Math.random()*120)+"px";
+      }
+      hamster.onclick = function() {
+        if(!hamsterPlaying) return;
+        hamsterScore++;
+        hamsterClicks++;
+        hamsterScoreText.textContent = "Caught: "+hamsterScore;
+        hamster.classList.add("pop");
+        hamsterResult.innerHTML = "You caught it! 🏆";
+        setTimeout(()=>{ hamsterResult.textContent = ""; },700);
+        setTimeout(()=>hamster.classList.remove("pop"),250);
+        moveHamster();
+        // End game if reached 10 catches
+        if(hamsterScore >= 10){
+          hamsterPlaying = false;
+          clearInterval(hamsterInterval);
+          clearTimeout(hamsterTimeout);
+          hamsterResult.innerHTML = `<b>Super Fast! Final Score: ${hamsterScore}</b>`;
+          setTimeout(()=>hamster.style.display="none",600);
+        }
+      };
+      function hamsterEscape(){
+        if(!hamsterPlaying) return;
+        hamsterPlaying = false;
+        clearInterval(hamsterInterval);
+        hamsterResult.innerHTML = `<b>Hamster Escaped!<br>Final Score: ${hamsterScore}</b>`;
+        setTimeout(()=>hamster.style.display="none",600);
+      }
+
+      // -------- Couple Food Game --------
+      let healthyPoints = 0, noodlePoints = 0;
+      const broccoli = document.getElementById('broccoli'),
+            noodles = document.getElementById('noodles'),
+            foodResult = document.getElementById('food-result'),
+            foodScore = document.getElementById('food-score'),
+            boyEmoji = document.getElementById('boy-emoji'),
+            girlEmoji = document.getElementById('girl-emoji'),
+            foodBanner = document.getElementById('food-banner'),
+            confettiDiv = document.getElementById('confetti'),
+            foodResetBtn = document.getElementById('foodResetBtn');
+      function updateFoodScore(){
+        foodScore.textContent = `🥦${healthyPoints} | ${noodlePoints}🍜`;
+        if(healthyPoints>noodlePoints) { boyEmoji.textContent="😍"; girlEmoji.textContent="😅"; }
+        else if(noodlePoints>healthyPoints) { girlEmoji.textContent="😋"; boyEmoji.textContent="😳"; }
+        else { girlEmoji.textContent=boyEmoji.textContent="😊"; }
+      }
+      function animateFood(el){
+        el.style.transform = "scale(1.25) rotate(-12deg)";
+        setTimeout(()=>el.style.transform="",320);
+      }
+      function showBanner(winner){
+        foodBanner.textContent = winner;
+        foodBanner.style.display = "";
+        confettiDiv.style.display = "";
+        confettiAnim();
+        setTimeout(()=>{
+          foodBanner.style.display="none";
+          confettiDiv.style.display="none";
+        }, 1500);
+      }
+      function confettiAnim(){
+        confettiDiv.innerHTML = "";
+        for(let i=0;i<16;i++){
+          let s=document.createElement('span');
+          s.textContent="🎊";
+          s.style.position="absolute";
+          s.style.left=(Math.random()*90)+"%";
+          s.style.top=(40+Math.random()*40)+"%";
+          s.style.fontSize=(20+Math.random()*16)+"px";
+          confettiDiv.appendChild(s);
+          setTimeout(()=>s.remove(),1400);
+        }
+      }
+      broccoli.onclick = function() {
+        healthyPoints++;
+        updateFoodScore(); animateFood(broccoli);
+        if(healthyPoints>=3){
+          showBanner("Healthy Wins! 🥦");
+          healthyPoints=0; noodlePoints=0; updateFoodScore();
+        }
+      };
+      noodles.onclick = function() {
+        noodlePoints++;
+        updateFoodScore(); animateFood(noodles);
+        if(noodlePoints>=3){
+          showBanner("Noodles Win! 🍜");
+          healthyPoints=0; noodlePoints=0; updateFoodScore();
+        }
+      };
+      foodResetBtn.onclick = function(){
+        healthyPoints=0; noodlePoints=0;
+        updateFoodScore();
+        foodBanner.style.display="none";
+        confettiDiv.style.display="none";
+      };
+      updateFoodScore();
+    });
+  </script>
+</body>
+</html>
