@@ -165,59 +165,79 @@
         setTimeout(()=>heartIcon.classList.remove("pop"),180);
       };
 
-      // -------- HARDER HAMSTER GAME --------
-      // More jumps, time limit, escape if not clicked in time
-      let hamsterScore = 0, hamsterPlaying = false, hamsterClicks = 0;
-      const hamster = document.getElementById('hamster'),
-            hsArea = document.getElementById('hamster-area'),
-            hamsterScoreText = document.getElementById('hamster-score'),
-            hamsterResult = document.getElementById('hamster-result'),
-            hamsterStartBtn = document.getElementById('hamsterStartBtn');
-      let hamsterInterval, hamsterTimeout;
+      // -------- HARDER HAMSTER GAME WITH SPOON ----------
+let hamsterScore = 0, hamsterPlaying = false, hamsterClicks = 0;
+const hamster = document.getElementById('hamster'),
+      hamsterScoreText = document.getElementById('hamster-score'),
+      hamsterResult = document.getElementById('hamster-result'),
+      hamsterStartBtn = document.getElementById('hamsterStartBtn'),
+      spoon = document.getElementById('spoon');
+let hamsterInterval, hamsterTimeout, spoonX = 86, spoonDir = 1, spoonTimer;
 
-      hamsterStartBtn.onclick = function() {
-        hamsterScore=0; hamsterClicks=0;
-        hamsterScoreText.textContent = "Caught: 0";
-        hamsterResult.textContent = "";
-        hamsterPlaying = true;
-        hamster.style.display = "";
-        moveHamster();
-        clearInterval(hamsterInterval);
-        clearTimeout(hamsterTimeout);
-        hamsterInterval = setInterval(moveHamster, 520); // Moves much faster
-        hamsterTimeout = setTimeout(hamsterEscape, 9000); // End after 9 seconds, escape
-      };
-      function moveHamster(){
-        if(!hamsterPlaying) return;
-        hamster.style.top = (15+Math.random()*80)+"px";
-        hamster.style.left = (10+Math.random()*120)+"px";
-      }
-      hamster.onclick = function() {
-        if(!hamsterPlaying) return;
-        hamsterScore++;
-        hamsterClicks++;
-        hamsterScoreText.textContent = "Caught: "+hamsterScore;
-        hamster.classList.add("pop");
-        hamsterResult.innerHTML = "You caught it! 🏆";
-        setTimeout(()=>{ hamsterResult.textContent = ""; },700);
-        setTimeout(()=>hamster.classList.remove("pop"),250);
-        moveHamster();
-        // End game if reached 10 catches
-        if(hamsterScore >= 10){
-          hamsterPlaying = false;
-          clearInterval(hamsterInterval);
-          clearTimeout(hamsterTimeout);
-          hamsterResult.innerHTML = `<b>Super Fast! Final Score: ${hamsterScore}</b>`;
-          setTimeout(()=>hamster.style.display="none",600);
-        }
-      };
-      function hamsterEscape(){
-        if(!hamsterPlaying) return;
-        hamsterPlaying = false;
-        clearInterval(hamsterInterval);
-        hamsterResult.innerHTML = `<b>Hamster Escaped!<br>Final Score: ${hamsterScore}</b>`;
-        setTimeout(()=>hamster.style.display="none",600);
-      }
+// Spoon movement animation
+function animateSpoon() {
+  spoonX += spoonDir * 2.5;
+  if (spoonX < 13) spoonDir = 1;
+  if (spoonX > 145) spoonDir = -1;
+  spoon.style.left = spoonX + "px";
+  spoonTimer = setTimeout(animateSpoon, 17);
+}
+
+function moveHamster(){
+  if(!hamsterPlaying) return;
+  hamster.style.top = (15+Math.random()*80)+"px";
+  hamster.style.left = (10+Math.random()*120)+"px";
+}
+
+hamsterStartBtn.onclick = function() {
+  hamsterScore=0; hamsterClicks=0;
+  hamsterScoreText.textContent = "Caught: 0";
+  hamsterResult.textContent = "";
+  hamsterPlaying = true;
+  hamster.style.display = "";
+  spoonX = 86; spoonDir = 1;
+  animateSpoon();
+  moveHamster();
+  clearInterval(hamsterInterval);
+  clearTimeout(hamsterTimeout);
+  hamsterInterval = setInterval(moveHamster, 520); // Moves much faster
+  hamsterTimeout = setTimeout(hamsterEscape, 9000); // End after 9 seconds, escape
+};
+
+hamster.onclick = function() {
+  if(!hamsterPlaying) return;
+  hamsterScore++;
+  hamsterClicks++;
+  hamsterScoreText.textContent = "Caught: "+hamsterScore;
+  hamster.classList.add("pop");
+  hamsterResult.innerHTML = "You caught it! 🏆";
+  setTimeout(()=>{ hamsterResult.textContent = ""; },700);
+  setTimeout(()=>hamster.classList.remove("pop"),250);
+  moveHamster();
+  // End game if reached 10 catches
+  if(hamsterScore >= 10){
+    hamsterWinOnSpoon();
+  }
+};
+
+function hamsterEscape(){
+  if(!hamsterPlaying) return;
+  hamsterPlaying = false;
+  clearInterval(hamsterInterval); clearTimeout(hamsterTimeout); clearTimeout(spoonTimer);
+  hamsterResult.innerHTML = `<b>Hamster Escaped!<br>Final Score: ${hamsterScore}</b>`;
+  setTimeout(()=>hamster.style.display="none",600);
+}
+
+function hamsterWinOnSpoon() {
+  hamsterPlaying = false;
+  clearInterval(hamsterInterval); clearTimeout(hamsterTimeout); clearTimeout(spoonTimer);
+  // Land hamster on spoon (top aligned just above the spoon, left to spoonX)
+  hamster.style.top = "98px";
+  hamster.style.left = spoonX + "px";
+  hamsterResult.innerHTML = `<b>Hamster Landed on Spoon!<br>Final Score: ${hamsterScore}</b>`;
+  setTimeout(()=>hamster.style.display="none",1200);
+}
+      
 
       // -------- Couple Food Game --------
       let healthyPoints = 0, noodlePoints = 0;
