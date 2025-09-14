@@ -35,6 +35,39 @@
     .winner-trophy {font-size:1.4em; margin-left:4px; margin-right:4px;}
     #hamster.pop {animation:hamster-bounce .44s cubic-bezier(.32,2.2,.46,.8);}
     @keyframes hamster-bounce {0%{transform:scale(1);} 47%{transform:scale(1.4) rotate(-23deg);} 100%{transform:scale(1);}}
+    /* Secret Photo Styles */
+    .reveal-btn {
+        margin:14px 0 22px 0;
+        border-radius:13px;
+        background:#ffd700;
+        color:#181826;
+        padding:13px 36px;
+        font-weight:bold;
+        font-size:1.16em;
+        box-shadow:0 2px 14px #0005;
+        outline:none;
+        border:none;
+        cursor:pointer;
+        transition:background 0.23s;
+    }
+    .reveal-btn:hover {
+        background:#ffe377;
+    }
+    .secret-photo-fade {
+        width:230px;
+        margin:0 auto 18px auto;
+        border-radius:16px;
+        box-shadow:0 2px 22px #fff4;
+        overflow:hidden;
+        display:none;
+        opacity:0;
+        transition:opacity 1.3s;
+        background:#181818;
+    }
+    .secret-photo-fade img {
+        width:100%;
+        display:block;
+    }
     @media (max-width:490px) {.card,.game-section{margin:2vw; padding:11px 3vw 13px 3vw;}
       .moon {left:73vw; width:38px; height:38px; top:2vw;} h1 {font-size:1.14em;} .hindi-words{font-size:1em;}
       .emotion-msg, .sweet-words, .footer{font-size:0.98em;}}
@@ -71,10 +104,15 @@
        mera dil meri rooh hai  apne chura liye but mujhe nhi chahiye wapas<br>
       With you, every moment is a Blessing.<br>
       Nannu,Aap Mera Sukkon ho.<br>
-    
       My princess mera pyaaru thodi games khel lo 
     </div>
     <div class="footer">— Apka Starr </div>
+    <!-- Secret Photo Button and Fade Effect Section -->
+    <button id="revealPhotoBtn" class="reveal-btn">Reveal Secret Photo</button>
+    <div id="secretPhoto" class="secret-photo-fade">
+      <img src="your_photo.jpg" alt="Secret Photo">
+    </div>
+    <!-- End Photo Reveal block -->
   </div>
   <!-- Game 1: Catch the Hamster -->
   <div class="game-section" id="hamsterGame">
@@ -93,15 +131,27 @@
   <div class="game-section" id="foodGame">
     <h2>Game 2: Healthy vs Noodles</h2>
     <button id="foodResetBtn" style="margin:7px 0 12px 0;border-radius:10px;background:#fff7b830;padding:8px 18px;border:1.4px solid #ffe3f5;color:#bc57c4;cursor:pointer;font-weight:bold;">Rematch</button>
-    <div id="food-area" style="position:relative;width:265px;height:110px;margin:0 auto;background:#34295c31;border-radius:16px;">
-      <img id="boy" src="image-1.png" alt="boy missing" style="position:absolute;width:50px;bottom:13px;left:13px;z-index:2;">
-      <span id="boy-emoji" style="position:absolute;bottom:75px;left:24px;font-size:1.3em;"></span>
-      <img id="girl" src="image-2.png" alt="girl missing" style="position:absolute;width:49px;bottom:12px;right:13px;z-index:2;">
-      <span id="girl-emoji" style="position:absolute;bottom:75px;right:24px;font-size:1.3em;"></span>
-      <img id="broccoli" src="food.png" alt="broccoli missing" style="position:absolute;width:30px;top:18px;left:65px;cursor:pointer;z-index:2;">
-      <img id="noodles" src="ramen.png" alt="noodles missing" style="position:absolute;width:38px;top:21px;right:80px;cursor:pointer;z-index:2;">
-      <span id="food-score" style="position:absolute;top:5px;left:108px;color:#ffe377;font-size:1.1em;font-weight:bold;">🥦0 | 0🍜</span>
-      <span id="food-banner" style="display:none;position:absolute;top:42px;left:0px;width:100%;font-size:1.24em;color:#fff;font-weight:bold;text-shadow:0 2px 6px #ea7aee;">Winner!</span>
+    <div id="food-area" style="position:relative;width:265px;height:150px;margin:0 auto;background:#34295c31;border-radius:16px;">
+      <!-- Boy at bottom left -->
+      <img id="boy" src="image-1.png" alt="boy missing"
+        style="position:absolute;width:48px;bottom:12px;left:22px;z-index:2;">
+      <span id="boy-emoji"
+        style="position:absolute;bottom:85px;left:43px;font-size:1.45em;"></span>
+      <!-- Girl at bottom right -->
+      <img id="girl" src="image-2.png" alt="girl missing"
+        style="position:absolute;width:48px;bottom:12px;right:22px;z-index:2;">
+      <span id="girl-emoji"
+        style="position:absolute;bottom:85px;right:43px;font-size:1.45em;"></span>
+      <!-- Food icons -->
+      <img id="broccoli" src="food.png" alt="broccoli missing"
+        style="position:absolute;width:34px;top:38px;left:63px;cursor:pointer;z-index:2;">
+      <img id="noodles" src="ramen.png" alt="noodles missing"
+        style="position:absolute;width:41px;top:38px;right:63px;cursor:pointer;z-index:2;">
+      <!-- Score and status -->
+      <span id="food-score"
+        style="position:absolute;top:13px;left:50%;transform:translateX(-50%);color:#ffe377;font-size:1.20em;font-weight:bold;z-index:10;">🥦0 | 0🍜</span>
+      <span id="food-banner"
+        style="display:none;position:absolute;top:62px;left:0px;width:100%;font-size:1.20em;color:#fff;font-weight:bold;text-shadow:0 2px 6px #ea7aee;text-align:center;">Winner!</span>
       <div id="confetti" style="display:none;position:absolute;inset:0;pointer-events:none;"></div>
     </div>
     <div class="score" id="food-result"></div>
@@ -109,7 +159,7 @@
   </div>
   <script>
     document.addEventListener("DOMContentLoaded",function(){
-      // Starfield animation
+      // Starfield animation (unchanged)
       function starsInit(canvasId, starCount, speed, size, opacity) {
         const canvas = document.getElementById(canvasId),
               ctx = canvas.getContext('2d');
@@ -165,22 +215,33 @@
         setTimeout(()=>heartIcon.classList.remove("pop"),180);
       };
 
+      // Photo reveal logic
+      const revealBtn = document.getElementById('revealPhotoBtn');
+      const secretPhoto = document.getElementById('secretPhoto');
+      revealBtn.onclick = function() {
+        revealBtn.style.display = "none";
+        secretPhoto.style.display = "block";
+        setTimeout(function() {
+          secretPhoto.style.opacity = "1";
+        }, 80);
+      };
+
       // -------- HARDER HAMSTER GAME WITH SPOON ----------
 let hamsterScore = 0, hamsterPlaying = false, hamsterClicks = 0;
 const hamster = document.getElementById('hamster'),
       hamsterScoreText = document.getElementById('hamster-score'),
       hamsterResult = document.getElementById('hamster-result'),
       hamsterStartBtn = document.getElementById('hamsterStartBtn'),
-      spoon = document.getElementById('spoon');
-let hamsterInterval, hamsterTimeout, spoonX = 86, spoonDir = 1, spoonTimer;
+      spoon = document.getElementById('cup');
+let hamsterInterval, hamsterTimeout, spoonX = 95, spoonDir = 1, spoonTimer;
 
 // Spoon movement animation
 function animateSpoon() {
   spoonX += spoonDir * 2.5;
-  if (spoonX < 13) spoonDir = 1;
-  if (spoonX > 145) spoonDir = -1;
+  if (spoonX < 20) spoonDir = 1;
+  if (spoonX > 150) spoonDir = -1;
   spoon.style.left = spoonX + "px";
-  spoonTimer = setTimeout(animateSpoon, 17);
+  spoonTimer = setTimeout(animateSpoon, 16);
 }
 
 function moveHamster(){
@@ -195,7 +256,7 @@ hamsterStartBtn.onclick = function() {
   hamsterResult.textContent = "";
   hamsterPlaying = true;
   hamster.style.display = "";
-  spoonX = 86; spoonDir = 1;
+  spoonX = 95; spoonDir = 1;
   animateSpoon();
   moveHamster();
   clearInterval(hamsterInterval);
@@ -208,7 +269,7 @@ hamster.onclick = function() {
   if(!hamsterPlaying) return;
   hamsterScore++;
   hamsterClicks++;
-  hamsterScoreText.textContent = "Nyenye nahi pakd paoge"+hamsterScore;
+  hamsterScoreText.textContent = "Nyenye nahi pakd paoge "+hamsterScore;
   hamster.classList.add("pop");
   hamsterResult.innerHTML ="Choro muje Neeche utaro!";
   setTimeout(()=>{ hamsterResult.textContent = ""; },700);
@@ -233,11 +294,10 @@ function hamsterWinOnSpoon() {
   clearInterval(hamsterInterval); clearTimeout(hamsterTimeout); clearTimeout(spoonTimer);
   // Land hamster on spoon (top aligned just above the spoon, left to spoonX)
   hamster.style.top = "98px";
-  hamster.style.left = spoonX + "px";
+  hamster.style.left = (spoonX + 8) + "px";
   hamsterResult.innerHTML = `<b>Hamster Landed on Spoon!<br>Final Score: ${hamsterScore}</b>`;
   setTimeout(()=>hamster.style.display="none",1200);
 }
-      
 
       // -------- Couple Food Game --------
       let healthyPoints = 0, noodlePoints = 0;
